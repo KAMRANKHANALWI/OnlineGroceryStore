@@ -9,7 +9,7 @@ def login():
     user = validate_login(email, password)
 
     if user:
-        print("\n Welcome {user[3]}")
+        print(f"\n Welcome {user[3]}")
         return user
     print("\nInvalid Credentials")
 

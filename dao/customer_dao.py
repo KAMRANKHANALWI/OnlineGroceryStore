@@ -42,10 +42,10 @@ def update_customer(customer):
     query = """
     UPDATE Customer
     SET
-        customer_name=?
-        address=?
-        contact_number=?
-    WHERE customer_id=?
+        customer_name = ?,
+        address = ?,
+        contact_number = ?
+    WHERE customer_id = ?
     """
 
     cur.execute(

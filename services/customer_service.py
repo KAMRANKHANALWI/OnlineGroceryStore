@@ -87,7 +87,7 @@ def update_customer_details():
     address = input("New Address : ")
     contact = input("New Contact : ")
 
-    update_customer = Customer(
+    updated_customer = Customer(
         customer_id=customer_id,
         login_id=customer[1],
         customer_name=name,
@@ -95,7 +95,7 @@ def update_customer_details():
         contact_number=contact,
     )
 
-    update_customer(update_customer)
+    update_customer(updated_customer)
     print("Your Details Updated Successfully")
 
 
