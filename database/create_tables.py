@@ -43,6 +43,54 @@ def create_tables():
     )
     """)
 
+    # CART TABLE
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS Cart(
+            cart_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            customer_id INTEGER NOT NULL,
+            product_id TEXT NOT NULL,
+            quantity INTEGER NOT NULL,
+            
+            FOREIGN KEY(customer_id)
+                REFERENCES Customer(customer_id),
+                
+            FOREIGN KEY(product_id)
+                REFERENCES Product(product_id)
+    )    
+    """)
+
+    # TRANSACTIONS TABLE
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS Transactions(
+            transactions_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            customer_id INTEGER NOT NULL,
+            payment_method TEXT NOT NULL,
+            total_amount REAL NOT NULL,
+            no_of_items INTEGER NOT NULL,
+            transaction_date TEXT NOT NULL,
+            
+            FOREIGN KEY(customer_id)
+                REFERENCES Customer(customer_id)
+    )
+    """)
+
+    # TRANSACTION ITEMS TABLE
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS Transaction_Items(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            transaction_id INTEGER NOT NULL,
+            product_id TEXT NOT NULL,
+            quantity INTEGER NOT NULL,
+            price REAL NOT NULL,
+
+            FOREIGN KEY(transaction_id)
+                REFERENCES Transactions(transaction_id),
+
+            FOREIGN KEY(product_id)
+                REFERENCES Product(product_id)
+    );
+    """)
+
     conn.commit()
 
     insert_default_admin(cursor)

@@ -71,7 +71,7 @@ def get_product_by_id(product_id):
         FROM Product
         WHERE product_id=?
         """,
-        (product_id),
+        (product_id,),
     )
 
     product = cur.fetchone()
@@ -86,12 +86,30 @@ def get_all_products():
     cur = conn.cursor()
 
     cur.execute("""
-        SELECT * 
+        SELECT *
         FROM Product
-        """)
+    """)
 
-    records = cur.fetchall()
+    products = cur.fetchall()
 
     conn.close()
 
-    return records
+    return products
+
+
+def update_product_stock(product_id, new_quantity):
+
+    conn = get_connection()
+
+    cur = conn.cursor()
+
+    query = """
+    UPDATE Product
+    SET stock_quantity=?
+    WHERE product_id=?
+    """
+
+    cur.execute(query, (new_quantity, product_id))
+
+    conn.commit()
+    conn.close()

@@ -102,3 +102,36 @@ def get_customer_by_email(email):
     conn.close()
 
     return customer
+
+
+def get_customer_by_login_id(login_id):
+    conn = get_connection()
+    cur = conn.cursor()
+
+    query = """
+    SELECT * FROM Customer WHERE login_id=?
+    """
+    cur.execute(query, (login_id,))
+
+    customer = cur.fetchone()
+
+    conn.close()
+
+    return customer
+
+
+def get_all_customers():
+    conn = get_connection()
+
+    cur = conn.cursor()
+
+    cur.execute("""
+            SELECT *
+            FROM Customer    
+    """)
+
+    customers = cur.fetchall()
+
+    conn.close()
+
+    return customers

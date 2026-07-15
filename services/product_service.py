@@ -13,12 +13,24 @@ from utils.generators import generate_product_id
 def add_product():
     print("\nADD PRODUCT")
 
-    name = input("Product Name : ")
-    description = input("Description : ")
-    company = input("Company Name : ")
-    category = input("Category : ")
-    price = float(input("Price : "))
-    quantity = int(input("Stock Quantity : "))
+    name = input("Product Name (0 to go back): ")
+    if name == "0":
+        return
+    description = input("Description (0 to go back): ")
+    if description == "0":
+        return
+    company = input("Company Name (0 to go back): ")
+    if company == "0":
+        return
+    category = input("Category (0 to go back): ")
+    if category == "0":
+        return
+    price = float(input("Price (0 to go back): "))
+    if price == "0":
+        return
+    quantity = int(input("Stock Quantity (0 to go back): "))
+    if quantity == "0":
+        return
 
     product = Product(
         product_id=generate_product_id(),
@@ -65,7 +77,9 @@ def sort_products_by_quantity():
 
 
 def update_product_details():
-    product_id = input("Enter Product ID : ")
+    product_id = input("Enter Product ID (0 to go back): ")
+    if product_id == "0":
+        return
 
     product = get_product_by_id(product_id)
 
@@ -73,12 +87,29 @@ def update_product_details():
         print("Product Not Found")
         return
 
-    name = input("Name : ")
-    description = input("Description : ")
-    company = input("Company : ")
-    category = input("Category : ")
-    price = float(input("Price : "))
-    quantity = int(input("Quantity : "))
+    name = input("Name (0 to go back): ")
+    if name == "0":
+        return
+
+    description = input("Description (0 to go back): ")
+    if description == "0":
+        return
+
+    company = input("Company (0 to go back): ")
+    if company == "0":
+        return
+
+    category = input("Category (0 to go back): ")
+    if category == "0":
+        return
+
+    price = float(input("Price (0 to go back): "))
+    if price == "0":
+        return
+
+    quantity = int(input("Quantity (0 to go back): "))
+    if quantity == "0":
+        return
 
     update_product = Product(
         product_id, name, description, company, category, price, quantity
@@ -87,3 +118,16 @@ def update_product_details():
     update_product(update_product)
 
     print("Product Updated Successfully")
+
+
+def view_all_products():
+    products = get_all_products()
+
+    if not products:
+        print("No Products Found")
+        return
+
+    print("\nALL PRODUCTS")
+
+    for product in products:
+        print(product)
